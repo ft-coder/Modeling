@@ -14,7 +14,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.createButt.clicked.connect(self.create_plot)
         self.ui.clearButt.clicked.connect(self.clear_plot)
-        self.ui.graphicsView.addLegend()
+        #self.ui.graphicsView.addLegend()
         self.ui.graphicsView.showGrid(x = True, y = True)
 
      def createRandom(self):
@@ -24,16 +24,16 @@ class MainWindow(QtWidgets.QMainWindow):
         return rand_arr
 
      def createTheory(self,A,B,alfa,beta):
-        Q = []
+        Q = [[],[]]
         for x in range(0,1000):
-            q = ( 1/(B-A) )*( (alfa*(x-A)**2)/2 + (beta * (x-B)**2)/2 )
-            Q.append(q)
+            y = ( 1/(B-A) )*( (alfa*(x-A)**2)/2 + (beta * (x-B)**2)/2 )
+            Q[0].append(y)
+            Q[1].append(x)
         return Q
      
      def createExp(self,A,B,alfa,beta):
         y_array = self.createRandom()
         Q = []
-
         pass
         
 
@@ -45,6 +45,9 @@ class MainWindow(QtWidgets.QMainWindow):
          B = self.ui.B_Edit.text()
          alfa = self.ui.alfa_Edit.text()
          beta = self.ui.beta_Edit.text()
+         points = self.createTheory(float(A),float(B),float(alfa),float(beta))
+
+         self.ui.graphicsView.plot(points[0],points[1],pen='g')
         
      def clear_plot(self):
         self.ui.graphicsView.clear()

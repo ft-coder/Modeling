@@ -75,30 +75,38 @@ class MainWindow(QtWidgets.QMainWindow):
          return X_Y        
          
 
-              
+     def createStats(self,A,B,alfa,beta):
+         #maxQ = max(points[0])
+        #index = points[0].index(min(points[0]))
+         #start_x_parabola = round(points[1][index])
+         x = ( alfa*A + beta*B ) / ( alfa+beta )
+         y = ( 1/((B-A)*2) )*( (alfa*(x-A)**2) + (beta * (x-B)**2) )
+         self.ui.stats.setText("Q(x*) = " + str(y) + "\n" + "x* = " + str(x))
+      
         
      def create_plot(self):
-         #A = self.ui.A_Edit.text()
-         #B = self.ui.B_Edit.text()
-         #alfa = self.ui.alfa_Edit.text()
-         #beta = self.ui.beta_Edit.text()
-         A=0
-         B=10
-         alfa=1
-         beta=1
+         A = self.ui.A_Edit.text()
+         B = self.ui.B_Edit.text()
+         alfa = self.ui.alfa_Edit.text()
+         beta = self.ui.beta_Edit.text()
+         #A=0
+         #B=10
+         #alfa=1
+         #beta=1
          
          points = self.createTheory(float(A),float(B),float(alfa),float(beta))
          self.ui.graphicsView.plot(points[1],points[0],name='Теория',pen='g')
+         self.createStats(float(A),float(B),float(alfa),float(beta))
          
 
-         points = self.createExp(float(A),float(B),float(alfa),float(beta))
+         '''points = self.createExp(float(A),float(B),float(alfa),float(beta))
          self.ui.graphicsView.plot(points[1], points[0],name='Эксперимент', pen='r')
         
          points = self.createVariation(points[1])
          self.ui.graphicsView.plot(points[1], points[0], name='Ср.квадрат.откл',pen='b')
 
          self.Q_exp=[]
-         self.Q_th=[]
+         self.Q_th=[]'''
 
      def clear_plot(self):
         self.ui.graphicsView.clear()

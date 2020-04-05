@@ -41,7 +41,7 @@
      <x>8</x>
      <y>21</y>
      <width>191</width>
-     <height>161</height>
+     <height>250</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -74,7 +74,7 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>A:</string>
+         <string>A:    </string>
         </property>
        </widget>
       </item>
@@ -84,12 +84,33 @@
       <item>
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>B:</string>
+         <string>B:     </string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLineEdit" name="B_Edit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>n:    </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="n_Edit"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>                               </string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -113,27 +134,63 @@
       </property>
      </widget>
     </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>          Теория x*</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="x_th_Edit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>                   Q*   </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="q_th_Edit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>Эксперимент x*</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="x_exp_Edit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>                  Q*    </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="q_exp_Edit"/>
+      </item>
+     </layout>
+    </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="stats">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>171</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
   </widget>
  </widget>
  <customwidgets>

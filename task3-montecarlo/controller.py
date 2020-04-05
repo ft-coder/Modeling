@@ -25,8 +25,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Q_th = []
         self.Q_exp = []
 
-     def createRandom(self,A,B):
-        return numpy.random.randint(A,B, 100)
+     def createRandom(self,A,B,n):
+        return numpy.random.randint(A,B, n)
 
      def createTheory(self,A,B,alfa,beta):
         Q = [[],[]]
@@ -40,12 +40,12 @@ class MainWindow(QtWidgets.QMainWindow):
         return Q
      
 
-     def createExp(self,A,B,alfa,beta):
+     def createExp(self,A,B,alfa,beta,n):
         x_arr = numpy.arange(A, B, 0.01)
         Q = []
         for x in x_arr:
             buff = 0
-            y_array = self.createRandom(A,B)
+            y_array = self.createRandom(A,B,n)
             for y in y_array:
                 if  x > y:
                     q = alfa * (x-y)
@@ -58,13 +58,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
             
 
-     def createVariation(self,A,B, alfa, beta):
-         #sigmas = [sqrt(((q_exp - q_th)**2)/len(self.Q_exp)) for q_exp, q_th in zip(self.Q_exp, self.Q_th)]
+     def createVariation(self,A,B, alfa, beta,n):
          x_arr = numpy.arange(A, B, 0.01)
          sigmas = []
          for x in x_arr:
             buff = 0
-            y_array = self.createRandom(A,B)
+            y_array = self.createRandom(A,B,n)
             q_th = ( 1/((B-A)*2) )*( (alfa*(x-A)**2) + (beta * (x-B)**2) )
             for y in y_array:
                 if  x > y:
@@ -76,29 +75,29 @@ class MainWindow(QtWidgets.QMainWindow):
             sigma = sqrt(d)
             sigmas.append(sigma)
          return [sigmas, x_arr]
-
-         
-
-       
          
 
      def createStats(self,A,B,alfa,beta):
          x = ( alfa*A + beta*B ) / ( alfa+beta )
          y = ( 1/((B-A)*2) )*( (alfa*(x-A)**2) + (beta * (x-B)**2) )
-         self.ui.stats.setText("Теория:\nQ(x*) = " + str(y) + "\nx* = " + str(x))
+         #self.ui.stats.setText("Теория:\nQ(x*) = " + str(round(y,2)) + "\nx* = " + str(round(x,2)))
+         self.ui.x_th_Edit.setText(str(round(x,2)))
+         self.ui.q_th_Edit.setText(str(round(y,2)))
 
      def createStatsExp(self,x_array, y_array):
          y = min(y_array)
          y_index = y_array.index(min(y_array))
          x = x_array[y_index]
-         self.ui.stats.setText( self.ui.stats.text() + "\nЭксперимент:\nQ(x*) = " + str(round(y,2)) + "\nx* = " + str(round(x,2)) )
-         
+         #self.ui.stats.setText( self.ui.stats.text() + "\nЭксперимент:\nQ(x*) = " + str(round(y,2)) + "\nx* = " + str(round(x,2)) )
+         self.ui.x_exp_Edit.setText(str(round(x,2)))
+         self.ui.q_exp_Edit.setText(str(round(y,2)))
        
      def create_plot(self):
          A = self.ui.A_Edit.text()
          B = self.ui.B_Edit.text()
          alfa = self.ui.alfa_Edit.text()
          beta = self.ui.beta_Edit.text()
+         n = self.ui.n_Edit.text()
          
          points = self.createTheory(float(A),float(B),float(alfa),float(beta))
          pen_style = pyqtgraph.mkPen('g', width=3)
@@ -106,16 +105,16 @@ class MainWindow(QtWidgets.QMainWindow):
          self.createStats(float(A),float(B),float(alfa),float(beta))
          
 
-         points = self.createExp(float(A),float(B),float(alfa),float(beta))
+         points = self.createExp(float(A),float(B),float(alfa),float(beta), int(n))
          pen_style = pyqtgraph.mkPen('b', width=2)
          self.ui.graphicsView.plot(points[1][0::40], points[0][0::40],name='Эксперимент', pen=None, symbol= 'o')
          #self.ui.graphicsView.plot(points[1][0::40],points[0][0::40],pen=pen_style)
          self.createStatsExp(points[1], points[0])
 
         
-         points = self.createVariation(float(A),float(B),float(alfa),float(beta))
+         points = self.createVariation(float(A),float(B),float(alfa),float(beta),int(n))
          pen_style = pyqtgraph.mkPen('r', pen_style=QtCore.Qt.DotLine, width=2)
-         self.ui.graphicsView.plot(points[1][0::40], points[0][0::40], name='Ср.квадрат.откл',pen=pen_style)
+         self.ui.graphicsView.plot(points[1][0::40], points[0][0::40], name='Стандарт.откл',pen=pen_style)
 
          self.Q_exp=[]
          self.Q_th=[]

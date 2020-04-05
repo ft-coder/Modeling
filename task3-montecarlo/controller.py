@@ -5,7 +5,6 @@ import os
 
 from PyQt5 import QtWidgets, QtCore
 from model import Ui_Form
-from collections import Counter
 from math import sqrt
 
 class MainWindow(QtWidgets.QMainWindow):

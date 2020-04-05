@@ -2,10 +2,14 @@ import pyqtgraph
 import random
 import sys
 import os
+import numpy
+
 
 from PyQt5 import QtWidgets, QtCore
 from model import Ui_Form
-from math import sqrt
+from collections import Counter
+from math import sqrt, pow
+
 
 class MainWindow(QtWidgets.QMainWindow):
      def __init__(self):
@@ -21,14 +25,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Q_th = []
         self.Q_exp = []
 
-
-        
-
      def createRandom(self,A,B):
-        rand_arr = []
-        for i in range(0,100):
-            rand_arr.append(random.randint(int(A),int(B)))
-        return rand_arr
+        return numpy.random.randint(A,B, 100)
 
      def createTheory(self,A,B,alfa,beta):
         Q = [[],[]]
@@ -43,10 +41,9 @@ class MainWindow(QtWidgets.QMainWindow):
      
 
      def createExp(self,A,B,alfa,beta):
-        Q = [[],[]]
-        x = A
-        
-        while x < B:
+        x_arr = numpy.arange(A, B, 0.01)
+        Q = []
+        for x in x_arr:
             buff = 0
             y_array = self.createRandom(A,B)
             for y in y_array:
@@ -55,37 +52,53 @@ class MainWindow(QtWidgets.QMainWindow):
                 else:
                     q = beta * (y-x)
                 buff += q
-            self.Q_exp.append(buff/len(y_array))
-            Q[0].append(buff/len(y_array))
-            Q[1].append(x)
-            x += 0.01
-        return Q    
+            self.Q_exp.append( buff/len(y_array))
+            Q.append( buff/len(y_array))
+        return [Q, x_arr]
 
+            
 
-     def createVariation(self, x_array):
-         '''d = [(self.Q_th[i] - self.Q_exp[i])**2 for i in range(len(self.Q_th))]
-         sigma = [sqrt( (1/(len(self.Q_th)-1)) * element ) for element in d]'''
+     def createVariation(self,A,B, alfa, beta):
+         #sigmas = [sqrt(((q_exp - q_th)**2)/len(self.Q_exp)) for q_exp, q_th in zip(self.Q_exp, self.Q_th)]
+         x_arr = numpy.arange(A, B, 0.01)
+         sigmas = []
+         for x in x_arr:
+            buff = 0
+            y_array = self.createRandom(A,B)
+            q_th = ( 1/((B-A)*2) )*( (alfa*(x-A)**2) + (beta * (x-B)**2) )
+            for y in y_array:
+                if  x > y:
+                    q_exp = alfa * (x-y)
+                else:
+                    q_exp = beta * (y-x)
+                buff += (q_th - q_exp)**2
+            d = buff/len(y_array)
+            sigma = sqrt(d)
+            sigmas.append(sigma)
+         return [sigmas, x_arr]
+
          
 
-                    
-         return X_Y        
+       
          
 
      def createStats(self,A,B,alfa,beta):
          x = ( alfa*A + beta*B ) / ( alfa+beta )
          y = ( 1/((B-A)*2) )*( (alfa*(x-A)**2) + (beta * (x-B)**2) )
-         self.ui.stats.setText("Q(x*) = " + str(y) + "\n" + "x* = " + str(x))
-      
-        
+         self.ui.stats.setText("Теория:\nQ(x*) = " + str(y) + "\nx* = " + str(x))
+
+     def createStatsExp(self,x_array, y_array):
+         y = min(y_array)
+         y_index = y_array.index(min(y_array))
+         x = x_array[y_index]
+         self.ui.stats.setText( self.ui.stats.text() + "\nЭксперимент:\nQ(x*) = " + str(round(y,2)) + "\nx* = " + str(round(x,2)) )
+         
+       
      def create_plot(self):
-         #A = self.ui.A_Edit.text()
-         #B = self.ui.B_Edit.text()
-         #alfa = self.ui.alfa_Edit.text()
-         #beta = self.ui.beta_Edit.text()
-         A=0
-         B=10
-         alfa=1
-         beta=1
+         A = self.ui.A_Edit.text()
+         B = self.ui.B_Edit.text()
+         alfa = self.ui.alfa_Edit.text()
+         beta = self.ui.beta_Edit.text()
          
          points = self.createTheory(float(A),float(B),float(alfa),float(beta))
          pen_style = pyqtgraph.mkPen('g', width=3)
@@ -95,16 +108,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
          points = self.createExp(float(A),float(B),float(alfa),float(beta))
          pen_style = pyqtgraph.mkPen('b', width=2)
-         self.ui.graphicsView.plot(points[1][0::25], points[0][0::25],name='Эксперимент', pen=None, symbol= 'o')
-         #self.ui.graphicsView.plot(points[1][0::20],points[0][0::20],pen=pen_style)
+         self.ui.graphicsView.plot(points[1][0::40], points[0][0::40],name='Эксперимент', pen=None, symbol= 'o')
+         #self.ui.graphicsView.plot(points[1][0::40],points[0][0::40],pen=pen_style)
+         self.createStatsExp(points[1], points[0])
 
         
-         '''points = self.createVariation(points[1])
-         self.ui.graphicsView.plot(points[1], points[0], name='Ср.квадрат.откл',pen='b')
-
+         points = self.createVariation(float(A),float(B),float(alfa),float(beta))
+         pen_style = pyqtgraph.mkPen('r', pen_style=QtCore.Qt.DotLine, width=2)
+         self.ui.graphicsView.plot(points[1][0::40], points[0][0::40], name='Ср.квадрат.откл',pen=pen_style)
 
          self.Q_exp=[]
-         self.Q_th=[]'''
+         self.Q_th=[]
 
      def clear_plot(self):
         self.ui.graphicsView.clear()

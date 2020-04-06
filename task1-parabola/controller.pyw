@@ -28,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         
     def create_parabola(self,a,b,c):
         
-        x = [point for point in range(-100,100)] 
+        x = [point for point in range(-10,10)] 
         y = []
 
         for point in x:

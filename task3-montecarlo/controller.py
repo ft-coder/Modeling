@@ -1,13 +1,11 @@
 import pyqtgraph
 import random
 import sys
-import os
 import numpy
 
 
 from PyQt5 import QtWidgets, QtCore
 from model import Ui_Form
-from collections import Counter
 from math import sqrt
 
 
@@ -49,13 +47,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     q_exp = beta * (y-x)
                 buff_variation += (q_th - q_exp)**2
                 buff_q_exp += q_exp
-            #Sigma
+            '''Sigma'''
             d = buff_variation/(len(y_array))
             sigma = sqrt(d)
             sigmas.append(sigma)
-            #Exp
+            '''Exp'''
             Q_exp.append(buff_q_exp/(len(y_array)))
-            #Th
+            '''Th'''
             Q_th.append(q_th)
 
          return {"q_th":Q_th,

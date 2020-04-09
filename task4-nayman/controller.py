@@ -12,26 +12,97 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.createButt.clicked.connect(self.create_plot)
         self.ui.clearButt.clicked.connect(self.clear_plot)
-        self.ui.graphicsView.addLegend()
         self.ui.graphicsView.setBackground(background='w')
         self.ui.graphicsView.showGrid(x=True, y=True)
+        self.H = 4 / 17
 
-    @staticmethod
-    def create_random(a, b, n):
-        rand_arr = []
-        for i in range(0, n):
-            rand_arr.append(a + (b - a) * random.random())
-        return rand_arr
+    def create_random(self, a, d):
+        x = a + (d - a) * random.random()
+        y = self.H * random.random()
+        return {
+            "x": x,
+            "y": y
+        }
 
-    def gen_plots(self, a, b, c, d, n):
-        pass
+    def func1(self, x):
+        return self.H/x
+
+    def func2(self, x):
+        return (3 * self.H)/(2*x - 4) + self.H/2
+
+    def func3(self, x):
+        return (3 * self.H)/(2*x - 4) + self.H
+
+    def gen_plot(self, a, b, c, d):
+        func1_points = {
+            "x1": a,
+            "y1": 0,
+            "x2": b,
+            "y2": self.func1(b)
+        }
+
+        func2_points = {
+            "x1": b,
+            "y1": self.func1(b),
+            "x2": c,
+            "y2": self.func2(c)
+        }
+
+        func3_points = {
+            "x1": c,
+            "y1": self.func2(c),
+            "x2": d,
+            "y2": 0
+        }
+        return [func1_points, func2_points, func3_points]
+
+    # https://studfile.net/preview/4662079/page:42/
+    def gen_barchart(self, a, b, c, d, n):
+        for i in range(0, 5000):
+            rand_pair = self.create_random(a, d)
+            if
+
+
 
     def create_plot(self):
-        a = self.ui.A_Edit.text()
-        b = self.ui.B_Edit.text()
-        c = self.ui.C_Edit.text()
-        d = self.ui.D_Edit.text()
-        n = self.ui.n_Edit.text()
+        """a = int(self.ui.A_Edit.text())
+        b = int(self.ui.B_Edit.text())
+        c = int(self.ui.C_Edit.text())
+        d = int(self.ui.D_Edit.text())
+        #n = int(self.ui.n_Edit.text())"""
+        a = 0
+        b = 2
+        c = 5
+        d = 8
+        n = 5000
+
+        points = self.gen_plot(a, b, c, d)
+        self.ui.graphicsView.plot(
+            (points[0]["x1"], points[0]["x2"]),
+            (points[0]["y1"], points[0]["y2"]),
+            pen='r'
+        )
+
+        self.ui.graphicsView.plot(
+            (points[1]["x1"], points[1]["x2"]),
+            (points[1]["y1"], points[1]["y2"]),
+            pen='r'
+        )
+
+        self.ui.graphicsView.plot(
+            (points[2]["x1"], points[2]["x2"]),
+            (points[2]["y1"], points[2]["y2"]),
+            pen='r'
+        )
+
+
+
+        '''bars = self.gen_barchart(a, b, c, d, n)
+        barchart = pyqtgraph.BarGraphItem(x0=range(a, b, bars['len']),
+                                          width=bars['widths'],
+                                          height=[height for height in bars['heights']],
+                                          brush='g')
+        self.ui.graphicsView.addItem(barchart)'''
 
     def clear_plot(self):
         self.ui.graphicsView.clear()

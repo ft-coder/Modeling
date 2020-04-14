@@ -19,10 +19,11 @@ class MainWindow(QtWidgets.QMainWindow):
  
      def random_array(self,N,A,B):
          rand_arr = []
-         for i in range(0,int(N)):
-             rand_arr.append(random.randint(int(A),int(B)))
-         print("Длинна масиива" + str(len(rand_arr)))
+         for i in range(0, N):
+             rand_arr.append(A + (B - A) * random.random())
          return rand_arr
+
+
 
      def input_validation(self,a,b,n,N):
         try:

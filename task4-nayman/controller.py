@@ -104,11 +104,6 @@ class MainWindow(QtWidgets.QMainWindow):
         c = int(self.ui.C_Edit.text())
         d = int(self.ui.D_Edit.text())
         n = int(self.ui.n_Edit.text())
-        '''a = 0
-        b = 2
-        c = 5
-        d = 8
-        n = 5000'''
 
         self.H = self.find_h(a, b, c, d)
         self.ui.H_Edit.setText(str(round(self.H, 3)))

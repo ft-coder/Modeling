@@ -15,12 +15,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.createButt.clicked.connect(self.create_plot)
         self.ui.clearButt.clicked.connect(self.clear_plot)
         self.ui.graphicsView.addLegend()
+        self.ui.graphicsView.setBackground(background='w')
         self.ui.graphicsView.showGrid(x = True, y = True)
  
      def random_array(self,N,A,B):
          rand_arr = []
-         for i in range(0, N):
-             rand_arr.append(A + (B - A) * random.random())
+         for i in range(0, int(N)):
+             rand_arr.append(int((int(A) + (int(B) - int(A)) * random.random())))
          return rand_arr
 
 

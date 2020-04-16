@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'view.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.2
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -68,6 +68,7 @@ class Ui_Form(object):
         self.n_Edit.setObjectName("n_Edit")
         self.horizontalLayout.addWidget(self.n_Edit)
         self.label_4 = QtWidgets.QLabel(self.layoutWidget)
+        self.label_4.setText("")
         self.label_4.setObjectName("label_4")
         self.horizontalLayout.addWidget(self.label_4)
         self.verticalLayout.addLayout(self.horizontalLayout)
@@ -79,24 +80,6 @@ class Ui_Form(object):
         self.clearButt.setDefault(False)
         self.clearButt.setObjectName("clearButt")
         self.verticalLayout.addWidget(self.clearButt)
-        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        self.label_9 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_9.setObjectName("label_9")
-        self.horizontalLayout_8.addWidget(self.label_9)
-        self.x_th_Edit = QtWidgets.QLineEdit(self.layoutWidget)
-        self.x_th_Edit.setObjectName("x_th_Edit")
-        self.horizontalLayout_8.addWidget(self.x_th_Edit)
-        self.verticalLayout.addLayout(self.horizontalLayout_8)
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.label_8 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_8.setObjectName("label_8")
-        self.horizontalLayout_7.addWidget(self.label_8)
-        self.q_th_Edit = QtWidgets.QLineEdit(self.layoutWidget)
-        self.q_th_Edit.setObjectName("q_th_Edit")
-        self.horizontalLayout_7.addWidget(self.q_th_Edit)
-        self.verticalLayout.addLayout(self.horizontalLayout_7)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.label_7 = QtWidgets.QLabel(self.layoutWidget)
@@ -127,11 +110,8 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", "A:    "))
         self.label_6.setText(_translate("Form", "B:     "))
         self.label_3.setText(_translate("Form", "n:    "))
-        self.label_4.setText(_translate("Form", "                               "))
         self.createButt.setText(_translate("Form", "Построить график"))
         self.clearButt.setText(_translate("Form", "Очистить координатную сетку"))
-        self.label_9.setText(_translate("Form", "          Теория x*"))
-        self.label_8.setText(_translate("Form", "                   Q*   "))
-        self.label_7.setText(_translate("Form", "Эксперимент x*"))
-        self.label_10.setText(_translate("Form", "                  Q*    "))
+        self.label_7.setText(_translate("Form", "                        x*"))
+        self.label_10.setText(_translate("Form", "                       Q*"))
 from pyqtgraph import PlotWidget

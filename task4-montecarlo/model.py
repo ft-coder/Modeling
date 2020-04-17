@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'view.ui'
 #
-# Created by: PyQt5 UI code generator 5.14.1
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -24,7 +24,7 @@ class Ui_Form(object):
         self.graphicsView.setGeometry(QtCore.QRect(205, 11, 621, 651))
         self.graphicsView.setObjectName("graphicsView")
         self.layoutWidget = QtWidgets.QWidget(Form)
-        self.layoutWidget.setGeometry(QtCore.QRect(8, 21, 191, 250))
+        self.layoutWidget.setGeometry(QtCore.QRect(8, 21, 181, 271))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -110,8 +110,11 @@ class Ui_Form(object):
         self.label_5.setText(_translate("Form", "A:    "))
         self.label_6.setText(_translate("Form", "B:     "))
         self.label_3.setText(_translate("Form", "n:    "))
-        self.createButt.setText(_translate("Form", "Построить график"))
-        self.clearButt.setText(_translate("Form", "Очистить координатную сетку"))
+        self.createButt.setText(_translate("Form", "Построить \n"
+"график"))
+        self.clearButt.setText(_translate("Form", "Очистить \n"
+"координатную \n"
+"сетку"))
         self.label_7.setText(_translate("Form", "                        x*"))
         self.label_10.setText(_translate("Form", "                       Q*"))
 from pyqtgraph import PlotWidget

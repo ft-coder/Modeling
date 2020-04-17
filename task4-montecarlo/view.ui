@@ -40,8 +40,8 @@
     <rect>
      <x>8</x>
      <y>21</y>
-     <width>191</width>
-     <height>250</height>
+     <width>197</width>
+     <height>291</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -117,14 +117,17 @@
     <item>
      <widget class="QPushButton" name="createButt">
       <property name="text">
-       <string>Построить график</string>
+       <string>Построить 
+график</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="clearButt">
       <property name="text">
-       <string>Очистить координатную сетку</string>
+       <string>Очистить 
+координатную 
+сетку</string>
       </property>
       <property name="autoDefault">
        <bool>false</bool>

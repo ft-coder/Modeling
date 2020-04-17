@@ -53,8 +53,8 @@ class MainWindow(QtWidgets.QMainWindow):
         Q_exp = []
 
         for x in x_arr:
-            buff_variation = 0
             buff_q_exp = 0
+            buff_var = []
             random_array = self.create_random(a, b, n)
 
             for num in random_array:
@@ -62,14 +62,18 @@ class MainWindow(QtWidgets.QMainWindow):
                     q_exp = alfa * (x - num)
                 else:
                     q_exp = beta * (num - x)
-                buff_variation += (num - x) ** 2
                 buff_q_exp += q_exp
-            '''Sigma'''
-            d = buff_variation / (len(random_array))
-            sigma = sqrt(d)
-            sigmas.append(sigma)
+                buff_var.append(q_exp)
             '''Exp'''
             Q_exp.append(buff_q_exp / (len(random_array)))
+            '''Var'''
+            d = 0
+            for q in buff_var:
+                d += (q - sum(buff_var)/len(buff_var))**2
+            d /= len(buff_var)
+            sigma = sqrt(d)
+            sigmas.append(sigma)
+
 
         return {"q_exp": Q_exp,
                 "sigma": sigmas,

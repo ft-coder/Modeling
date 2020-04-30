@@ -2,6 +2,8 @@
 Задания по предмету "Компьютерное моделирование"
 ## Шоб всё работало:
   1. pip install PyQt5
-  2. pip install pyqtgraph https://pythonworld.ru/osnovy/pip.html
-  3. Запускаем controller.py интересующей лабы
+  2. pip install pyqtgraph
+  3. pip install numpy 
+  4. Запускаем controller.py интересующей лабы  
+  https://pythonworld.ru/osnovy/pip.html
  

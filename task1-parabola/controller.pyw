@@ -15,8 +15,7 @@ graph_counter = 0
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
-        self.ui = Ui_Form()
+        super(MainWindow, self).__init__()zz
         self.ui.setupUi(self)
         self.ui.createButt.clicked.connect(self.create_plot)
         self.ui.clearButt.clicked.connect(self.clear_plot)

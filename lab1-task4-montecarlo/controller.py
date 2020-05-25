@@ -73,7 +73,7 @@ class MainWindow(QtWidgets.QMainWindow):
             '''Var'''
             d = 0
             for q in buff_var:
-                d += (q - sum(buff_var)/len(buff_var))**2
+                d += (q - sum(buff_var) / len(buff_var)) ** 2
             d /= len(buff_var)
             sigma = sqrt(d)
             sigmas.append(sigma)
@@ -81,16 +81,14 @@ class MainWindow(QtWidgets.QMainWindow):
                 "sigma": sigmas,
                 "x_arr": x_arr}
 
-    def create_theory(self,a, b, alfa, beta):
+    def create_theory(self, a, b, alfa, beta):
         x_arr = numpy.arange(a, b, 0.01)
-        Q_th = [[],[]]
+        Q_th = [[], []]
         for x in x_arr:
             q_th = (1 / ((b - a) * 2)) * ((alfa * (x - a) ** 2) + (beta * (x - b) ** 2))
             Q_th[0].append(x)
             Q_th[1].append(q_th)
         return Q_th
-
-
 
     def create_stats_exp(self, x_array, y_array):
         y = min(y_array)
@@ -118,10 +116,8 @@ class MainWindow(QtWidgets.QMainWindow):
         pen_style = pyqtgraph.mkPen('r', pen_style=QtCore.Qt.DotLine, width=2)
         self.ui.graphicsView.plot(points["x_arr"], points["sigma"], name='Стандарт.откл', pen=pen_style)
 
-        points = self.create_theory(a,b,alfa,beta)
+        points = self.create_theory(a, b, alfa, beta)
         self.ui.graphicsView.plot(points[0], points[1], name='Теория', pen='g')
-
-
 
     def clear_plot(self):
         self.ui.graphicsView.clear()
